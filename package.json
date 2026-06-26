@@ -1,0 +1,19 @@
+{
+  "name": "simplecrypt-web-tool",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vite": "latest",
+    "typescript": "latest",
+    "pako": "latest"
+  },
+  "devDependencies": {
+    "@types/pako": "latest"
+  }
+}

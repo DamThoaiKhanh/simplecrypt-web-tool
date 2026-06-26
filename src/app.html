@@ -1,0 +1,118 @@
+<main class="shell">
+  <section class="card">
+    <h1>SimpleCrypt Web Tool</h1>
+    <p class="subtext">
+      Encrypt/decrypt with the same SimpleCrypt Base64 format for AMR data.
+    </p>
+
+    <div class="tabs" role="tablist" aria-label="Input mode">
+      <button
+        id="fileTabButton"
+        class="tab active"
+        type="button"
+        role="tab"
+        aria-selected="true"
+        aria-controls="filePanel"
+      >
+        File
+      </button>
+      <button
+        id="textTabButton"
+        class="tab"
+        type="button"
+        role="tab"
+        aria-selected="false"
+        aria-controls="textPanel"
+      >
+        Text / Base64
+      </button>
+    </div>
+
+    <section
+      id="filePanel"
+      class="tab-panel active"
+      role="tabpanel"
+      aria-labelledby="fileTabButton"
+    >
+      <p class="hint">
+        Uploaded a file either as plain text (decrypted) or Base64 (encrypted).
+        Encrypted output will be in Base64 format, or decrypt to text.
+      </p>
+
+      <label class="dropzone" for="fileInput">
+        <strong>Choose a text file</strong>
+        <span id="fileName">No file selected</span>
+        <input id="fileInput" type="file" />
+      </label>
+
+      <div class="actions">
+        <button id="encryptFileTextButton" type="button">
+          Encrypt to Base64
+        </button>
+        <button id="decryptFileBase64Button" class="secondary" type="button">
+          Decrypt to text
+        </button>
+      </div>
+
+      <label class="field output-field">
+        <span>Output preview</span>
+        <textarea id="fileOutput" readonly></textarea>
+      </label>
+
+      <div class="actions">
+        <button id="copyFileOutputButton" class="secondary" type="button">
+          Copy text
+        </button>
+        <button id="downloadFileOutputButton" class="secondary" type="button">
+          Download file
+        </button>
+      </div>
+
+      <p id="fileStatus" class="status">Ready.</p>
+    </section>
+
+    <section
+      id="textPanel"
+      class="tab-panel"
+      role="tabpanel"
+      aria-labelledby="textTabButton"
+      hidden
+    >
+      <p class="hint">
+        Paste either as plain text (decrypted) or Base64 (encrypted). Encrypted
+        output will be in Base64 format, or decrypt to text.
+      </p>
+
+      <label class="field">
+        <span>Text / Base64 input</span>
+        <textarea
+          id="textInput"
+          placeholder="Plain text to encrypt, or Base64 to decrypt."
+        ></textarea>
+      </label>
+
+      <div class="actions">
+        <button id="encryptTextButton" type="button">Encrypt to Base64</button>
+        <button id="decryptTextButton" class="secondary" type="button">
+          Decrypt to text
+        </button>
+      </div>
+
+      <label class="field output-field">
+        <span>Output preview</span>
+        <textarea id="textOutput" readonly></textarea>
+      </label>
+
+      <div class="actions">
+        <button id="copyTextOutputButton" class="secondary" type="button">
+          Copy text
+        </button>
+        <button id="downloadTextOutputButton" class="secondary" type="button">
+          Download file
+        </button>
+      </div>
+
+      <p id="textStatus" class="status">Ready.</p>
+    </section>
+  </section>
+</main>
