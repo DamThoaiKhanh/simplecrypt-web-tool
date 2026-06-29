@@ -1,0 +1,38 @@
+name: Build Web App
+
+on:
+  push:
+    branches: ["main"] # Runs every time you push code to the main branch
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest # Using Linux so it uses 1x free minutes!
+
+    steps:
+      # 1. Copy your code to the cloud machine
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/actions-setup-node@v4
+        with:
+          node-version: "20" # Uses a stable Node.js version
+          cache: "npm" # Caches dependencies to make future builds faster
+
+      # 3. Install project dependencies (ignores node_modules from your local computer)
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Compile TypeScript and build the web tool
+      - name: Build production site
+        run: npm run build
+
+      # 5. Save the compiled web folder so you can download it
+      - name: Upload production build
+        uses: actions/upload-artifact@v4
+        with:
+          name: simplecrypt-production-site
+          path: dist/ # NOTE: change this to 'build/' or 'out/' if your package.json builds to a different folder
