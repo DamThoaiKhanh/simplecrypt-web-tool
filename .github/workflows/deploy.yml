@@ -14,7 +14,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # FIX IS RIGHT HERE: changed 'actions/actions-setup-node' to 'actions/setup-node'
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -22,7 +21,7 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build production site
         run: npm run build
