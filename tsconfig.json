@@ -10,11 +10,11 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "Bundler",
+    "moduleResolution": "Node",
     "types": ["vite/client"],
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true
   },
-  "include": ["src", "src/vite-env.d.ts"]
+  "include": ["src"]
 }
