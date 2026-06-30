@@ -4,13 +4,11 @@ on:
   push:
     branches: ["main"]
 
-# CẤP QUYỀN: Bắt buộc phải có đoạn này để GitHub Actions có quyền tạo trang web cho bạn
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Quản lý concurrency để tránh việc 2 lượt push liên tiếp làm lỗi deploy
 concurrency:
   group: "pages"
   cancel-in-progress: true
@@ -34,17 +32,14 @@ jobs:
       - name: Build production site
         run: npm run build
 
-      # BƯỚC CD 1: Cấu hình môi trường Pages trên máy chủ đám mây
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      # BƯỚC CD 2: Gom toàn bộ thư mục sản phẩm 'dist' thành gói nạp trang web
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: "./dist"
 
-      # BƯỚC CD 3: Đưa trang web lên môi trường trực tuyến công cộng!
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
