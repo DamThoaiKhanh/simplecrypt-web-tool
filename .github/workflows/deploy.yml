@@ -1,10 +1,19 @@
-name: Build Web App
+name: Build and Deploy Web App
 
 on:
   push:
     branches: ["main"]
-  pull_request:
-    branches: ["main"]
+
+# CẤP QUYỀN: Bắt buộc phải có đoạn này để GitHub Actions có quyền tạo trang web cho bạn
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Quản lý concurrency để tránh việc 2 lượt push liên tiếp làm lỗi deploy
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -19,15 +28,23 @@ jobs:
         with:
           node-version: "22"
 
-      # THAY ĐỔI Ở ĐÂY: Thêm --no-package-lock để tránh việc npm bị crash do file lock cũ
       - name: Install dependencies
         run: npm install --include=dev --no-package-lock
 
       - name: Build production site
         run: npm run build
 
-      - name: Upload production build
-        uses: actions/upload-artifact@v4
+      # BƯỚC CD 1: Cấu hình môi trường Pages trên máy chủ đám mây
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # BƯỚC CD 2: Gom toàn bộ thư mục sản phẩm 'dist' thành gói nạp trang web
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: simplecrypt-production-site
-          path: dist/
+          path: "./dist"
+
+      # BƯỚC CD 3: Đưa trang web lên môi trường trực tuyến công cộng!
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
