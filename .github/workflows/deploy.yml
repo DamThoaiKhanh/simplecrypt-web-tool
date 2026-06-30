@@ -17,11 +17,11 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "npm"
+          node-version: "22" # Cập nhật lên Node 22 để không bị cảnh báo deprecation giống trong ảnh của bạn nhé
 
+      # THAY ĐỔI Ở ĐÂY: Thêm `--include=dev` để đảm bảo Vite và TypeScript được cài đặt đầy đủ trên môi trường CI
       - name: Install dependencies
-        run: npm install
+        run: npm install --include=dev
 
       - name: Build production site
         run: npm run build
